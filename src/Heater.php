@@ -6,9 +6,18 @@ class Heater
     {
     }
 
-    public function switch(string $state): void
+    public function switchOn()
     {
+        $this->switch("on");
+    }
 
+    public function switchOff()
+    {
+        $this->switch("off");
+    }
+
+    private function switch(string $state): void
+    {
         try {
             if (!($s = socket_create(AF_INET, SOCK_STREAM, 0))) {
                 die('could not create socket');

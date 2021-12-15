@@ -1,13 +1,18 @@
 <?php
 
+use JetBrains\PhpStorm\Pure;
+
 class Temperature
 {
-    public function __construct(private string $url = "http://probe.home:9999/temp")
+    private Url $url;
+
+    #[Pure] public function __construct(string $url)
     {
+        $this->url = new Url($url);
     }
 
     public function toFloat(): float
     {
-        return (float)(new Url($this->url))->getString(4);
+        return (float)($this->url)->getString(4);
     }
 }

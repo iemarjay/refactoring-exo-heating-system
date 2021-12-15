@@ -4,15 +4,18 @@ use JetBrains\PhpStorm\Pure;
 
 class Thermostat
 {
-
     #[Pure]
     public function __construct(private Heater $heater, private Temperature $temperature)
     {
     }
 
-    function manageHeating(float $threshold): void
+    function regulateHeater(float $threshold): void
     {
-        $this->heater->switch($this->temperature->toFloat() < $threshold ? "on" : "off");
+        if ($this->temperature->toFloat() < $threshold) {
+            $this->heater->switchOn();
+        } else {
+            $this->heater->switchOff();
+        }
     }
 
 }
