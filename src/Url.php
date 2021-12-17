@@ -2,21 +2,23 @@
 
 class Url
 {
-    public function __construct(private string $url)
-    {
-    }
+    private string|bool $output;
 
-    public function getString(int $length): string
+    public function __construct(private string $url)
     {
         $c = curl_init();
 
         curl_setopt($c, CURLOPT_URL, $this->url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 
-        $o = curl_exec($c);
+        $this->output = curl_exec($c);
 
         curl_close($c);
+    }
 
-        return substr($o, 0, $length);
+    public function getString(int $length): string
+    {
+
+        return substr($this->output, 0, $length);
     }
 }

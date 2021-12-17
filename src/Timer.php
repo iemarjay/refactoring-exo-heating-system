@@ -13,12 +13,12 @@ class Timer
         $this->endHourUrl = new Url("{$this->baseUrl}/end");
     }
 
-    private function startHour(): float
+    #[Pure] private function startHour(): float
     {
         return floatval($this->startHourUrl->getString(5));
     }
 
-    private function endHour(): float
+    #[Pure] private function endHour(): float
     {
         return floatval($this->endHourUrl->getString(5));
     }
@@ -26,7 +26,7 @@ class Timer
     /**
      * @return bool
      */
-    public function isBetweenTimeOfDay(): bool
+    #[Pure] public function isBetweenTimeOfDay(): bool
     {
         return gettimeofday(true) > $this->startHour() && gettimeofday(true) < $this->endHour();
     }
@@ -34,7 +34,7 @@ class Timer
     /**
      * @return bool
      */
-    public function isNotBetweenTimeOfDay(): bool
+    #[Pure] public function isNotBetweenTimeOfDay(): bool
     {
         return gettimeofday(true) < $this->startHour() || gettimeofday(true) > $this->endHour();
     }
